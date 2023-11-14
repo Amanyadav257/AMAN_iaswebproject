@@ -26,7 +26,7 @@ function get_full_que()
 
         echo " <div class='row'>
     <div class='col-md-12 bg-secondary p-1 d-flex  p-3'>
-    <div>
+    <div class='media'>
         <h3 class='text-light text-center'>Subject: $subject</h3>
         <h4 class='text-light'>Title: $title</h4>
         <h4 class='text-light'>Topic: $topic</h4>
@@ -78,6 +78,20 @@ function get_full_que()
             position: fixed;
             bottom: 0;
             width: 100%;
+        }
+
+        @media only screen and (max-width: 975px) {
+
+            * {
+                overflow-x: hidden;
+            }
+
+            .imge {
+                width: 100%;
+                height: auto;
+                min-width: auto;
+                max-width: auto;
+            }
         }
     </style>
 </head>
