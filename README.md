@@ -1,8 +1,7 @@
-# amantrulyias.infinityfreeapp.com
+# AMAN_IasWebproject
 
 Admin_name-: AMAN
-#
 Password-: 123456
 
 
-host-: #amantrulyias.infinityfreeapp.com
+host-: http://amantrulyias.infinityfreeapp.com
