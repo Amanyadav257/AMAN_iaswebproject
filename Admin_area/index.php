@@ -26,12 +26,6 @@ if (isset($_POST['insert_que'])) {
     echo "<script>window.open('./index.php','_self')</script>";
 }
 
-// function admin_name(){
-//     global $con;
-//     $user_name = $_SESSION['username'];
-//     echo "<p class='text-light text-center'>$user_name</p>";
-
-// }
 
 ?>
 
@@ -53,12 +47,13 @@ if (isset($_POST['insert_que'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--------------------------------------------------------------- css file ------------------------------------------------------->
-
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         .admin_image {
@@ -77,6 +72,15 @@ if (isset($_POST['insert_que'])) {
         .container-fluid h1 span {
             color: #ff004f;
         }
+
+        @media only screen and (max-width: 975px) {
+            .text-media{
+                resize: vertical;
+                width: 100%; /* Adjust width for larger screens */
+            }
+        
+        }
+
     </style>
 </head>
 
@@ -157,7 +161,7 @@ if (isset($_POST['insert_que'])) {
                         Answer
                     </label>
                     <div>
-                        <textarea id='answer' name='answer' rows='4' cols='70' style='resize: vertical;'
+                        <textarea id='answer' name='answer' rows='4' cols='70' class='text-media' style='resize: vertical;'
                             placeholder='Type your answer here...'></textarea>
                     </div>
                 </div>

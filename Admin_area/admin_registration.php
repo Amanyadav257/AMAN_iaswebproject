@@ -3,6 +3,23 @@
  include('../includes/connect.php');
 //  include('./functions/common_function.php');
 session_start();
+
+function getIPAddress() {  
+    //whether ip is from the share internet  
+     if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                $ip = $_SERVER['HTTP_CLIENT_IP'];  
+        }  
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+     }  
+//whether ip is from the remote address  
+    else{  
+             $ip = $_SERVER['REMOTE_ADDR'];  
+     }  
+     return $ip;  
+}  
+
 ?>
 
 
@@ -103,15 +120,15 @@ if(isset($_POST['user_signup'])){
     $user_image=$_FILES['user_Image']['name'];
     $user_image_tmp=$_FILES['user_Image']['tmp_name'];
 
-    move_uploaded_file($user_image_tmp,"./admin_images/$user_image");
+    move_uploaded_file($user_image_tmp,"../admin_images/$user_image");
 
     $user_ip=getIPAddress();
 
-    $select_query="select * from `admin_table` where user_name='$user_name' or user_email='$user_email' ";
+    $select_query="select * from `admin_table` where  user_email='$user_email' ";
     $result=mysqli_query($con,$select_query);
     $rows_count=mysqli_num_rows($result);
     if($rows_count > 0){
-        echo "<script>alert('Username or Email already exist')</script>";
+        echo "<script>alert('Email already exist')</script>";
     }else if($user_password != $conf_user_password){
         echo "<script>alert('Passwords don't match')</script>";
     }else{
@@ -122,23 +139,14 @@ if(isset($_POST['user_signup'])){
     $sql_execute=mysqli_query($con,$insert_query);
 
     if($sql_execute){
+        $user_names=$_POST['user_name'];
+        $_SESSION['username']=$user_names;
         echo "<script>alert('registration completed successfully)</script>";
+        echo "<script>window.open('./index.php','_self')</script>";
     }else{
         die(mysqli_error($con));
     }
     
-}
-
-// Searching 
-
-$select_items="select * from `admin_table` where ip_address='$user_ip'";
-$result_=mysqli_query($con,$select_items);
-$rows_count=mysqli_num_rows($result_);
-if($rows_count > 0){
-    $_SESSION['username']=$user_name;
-    echo "<script>alert('Already registered')</script>";
-}else{
-    echo "<script>window.open('./index.php','_self')</script>";
 }
 
 }
